@@ -13,17 +13,13 @@ const ToggleMode = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <Button variant="outline" size="icon" disabled={true}></Button>;
-  }
-
   const dark = theme === "dark";
 
-  return (
+  return mounted ? (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(`${dark ? "light" : "dark"}`)}
+      onClick={() => setTheme(dark ? "light" : "dark")}
     >
       {dark ? (
         <Sun className="hover:cursor-pointer hover:text-primary" />
@@ -31,6 +27,8 @@ const ToggleMode = () => {
         <Moon className="hover:cursor-pointer hover:text-primary" />
       )}
     </Button>
+  ) : (
+    <Button variant="outline" size="icon" disabled={true} />
   );
 };
 
